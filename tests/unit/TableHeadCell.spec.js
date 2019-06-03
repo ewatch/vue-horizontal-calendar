@@ -1,5 +1,5 @@
-import { shallowMount } from "@vue/test-utils";
-import TableHeadCell from "@/components/TableHeadCell.vue";
+import { shallowMount } from "@vue/test-utils"
+import TableHeadCell from "@/components/TableHeadCell.vue"
 
 const dayOfMonth = 1
 const componentFactory = (propsData) => {
