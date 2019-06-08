@@ -6,9 +6,12 @@
       <thead>
         <table-head-cell
           v-for="date in dates"
+          :class="{ today: date.getDate() === selectedDate.getDate()}"
           :day-of-month="date.getDate()"
           :day-name="getDayName(date.getDay())"
+          :month-name="getMonthName(date.getMonth())"
           :key="date.getTime()"
+          @cell:clicked="setSelectedDate(date)"
         />
       </thead>
     </table>
@@ -17,6 +20,7 @@
 
 <script>
 import TableHeadCell from "./TableHeadCell.vue";
+import * as dateHelper from "../helper/date.js";
 
 export default {
   components: {
@@ -25,7 +29,7 @@ export default {
   props: {
     renderDays: {
       type: Number,
-      default: 13
+      default: 26
     },
     date: {
       type: Date,
@@ -52,7 +56,25 @@ export default {
     }
   },
   methods: {
-
+    getDayName: dateHelper.getDayName,
+    getMonthName: dateHelper.getMonthName,
+    setSelectedDate: function(date) {
+      this.selectedDate = date;
+    }
   }
 };
 </script>
+
+<style>
+table, td, th {
+  border: 1px solid black;
+}
+
+.today {
+  border: 5px solid blue;
+}
+
+th {
+  width: 50px;
+}
+</style>

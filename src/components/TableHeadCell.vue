@@ -1,5 +1,5 @@
 <template>
-  <th>
+  <th @click="onCellClicked">
     <div class="day-of-month">{{ dayOfMonth }}</div>
     <div class="day-name">{{ dayName }}</div>
     <div class="month-name">{{ monthName }}</div>
@@ -21,6 +21,11 @@ export default {
     monthName: {
       type: String,
       required: false
+    }
+  },
+  methods: {
+    onCellClicked: function() {
+      this.$emit('cell:clicked');
     }
   }
 };
