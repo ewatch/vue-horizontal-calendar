@@ -98,5 +98,16 @@ describe('CharacterCounter.vue', () => {
         it('should render a th containing the dayName', () => {
             expect(wrapper.find('th').text()).toContain('February')
         })        
-    })    
+    })
+    
+    describe('behaviour of the component', () => {
+      it('should emit an event when click on the table head cell', () => {
+          const wrapper = componentFactory()
+
+          wrapper.trigger('click')
+
+          expect(wrapper.emitted('cell:clicked')).toHaveLength(1)
+      })
+
+    })
 })

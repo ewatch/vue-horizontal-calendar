@@ -3,6 +3,7 @@ import TableCalendar from "@/components/TableCalendar.vue"
 import TableHeadCell from "@/components/TableHeadCell.vue"
 
 
+
 const componentFactory = (propsData) => {
     return shallowMount(TableCalendar, {
       propsData: {
@@ -11,11 +12,22 @@ const componentFactory = (propsData) => {
     })
   }
 
-describe('CharacterCounter.vue', () => {
+describe('TableCalendar.vue', () => {
     it('exists', () => {
       const wrapper = componentFactory()
   
       expect(wrapper).toBeDefined()
+    })
+
+    it('should have an element as marked being "today"', () => {
+      const wrapper = componentFactory()
+  
+      expect(wrapper.html()).toContain('class="today"')
+      expect(wrapper.findAll(TableHeadCell).length).toBe(13)
+
+      const sixthHeadCell = wrapper.findAll(TableHeadCell).at(6)
+      expect(sixthHeadCell.html()).toContain('class="today"')
+      
     })
 
     describe('test properties', () => {
@@ -55,7 +67,7 @@ describe('CharacterCounter.vue', () => {
         })
       })
       
-      describe('should have computed prop', () => {
+      describe('should have computed prop for the array of dates to be rendered', () => {
         const wrapper = componentFactory()
         const datesCompProp = wrapper.vm.dates
         const thisMock = { renderDays: 13, date: new Date()}
@@ -80,4 +92,19 @@ describe('CharacterCounter.vue', () => {
             expect(wrapper.find(TableHeadCell).is(TableHeadCell)).toBe(true)
         })
     })
+
+    describe('method to compare provided date to selected one', () => {
+      const testDate = new Date()
+      const wrapper = componentFactory({date: testDate})
+
+      it('should return true if dates are equal', () => {
+          expect(wrapper.vm.equalsSelectedDate(testDate)).toBe(true)
+      })
+
+      it('should return false if dates are not equal', () => {
+        const newDate = new Date(testDate.getDate() + 1)
+        expect(wrapper.vm.equalsSelectedDate(newDate)).toBe(false)
+    })
+
+  })
 })

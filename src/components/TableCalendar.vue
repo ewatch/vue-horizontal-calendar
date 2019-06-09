@@ -6,7 +6,7 @@
       <thead>
         <table-head-cell
           v-for="date in dates"
-          :class="{ today: date.getDate() === selectedDate.getDate()}"
+          :class="{ today: equalsSelectedDate(date)}"
           :day-of-month="date.getDate()"
           :day-name="getDayName(date.getDay())"
           :month-name="getMonthName(date.getMonth())"
@@ -22,6 +22,8 @@
 import TableHeadCell from "./TableHeadCell.vue";
 import * as dateHelper from "../helper/date.js";
 
+const ONE_DAY_AS_MS = 86400000;
+
 export default {
   components: {
     TableHeadCell
@@ -29,7 +31,7 @@ export default {
   props: {
     renderDays: {
       type: Number,
-      default: 26
+      default: 13
     },
     date: {
       type: Date,
@@ -44,24 +46,27 @@ export default {
   computed: {
     dates: function() {
       let dateArray = [];
-      const elementsBeforeAndAfter = (this.renderDays - 1) / 2;
       const startDate = new Date(this.selectedDate);
+      const amountOfDaysBeforeAndAfter = dateHelper.calculateRenderDays(this.renderDays);
 
-      startDate.setDate(this.selectedDate.getDate() - elementsBeforeAndAfter);
+      startDate.setDate(startDate.getDate() - amountOfDaysBeforeAndAfter);
       for (let i = 0; i < this.renderDays; i++) {
-        dateArray.push(new Date(startDate.getTime() + i * 86400000));
+        dateArray.push(new Date(startDate.getTime() + i * ONE_DAY_AS_MS));
       }
-      console.log(dateArray);
+
       return dateArray;
     }
   },
-  methods: {
+    methods: {
     getDayName: dateHelper.getDayName,
     getMonthName: dateHelper.getMonthName,
     setSelectedDate: function(date) {
       this.selectedDate = date;
+    },
+    equalsSelectedDate: function(date) {
+      return date.getDate() === this.selectedDate.getDate()
     }
-  }
+  },
 };
 </script>
 

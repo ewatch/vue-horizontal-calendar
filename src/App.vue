@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <table-calendar />
+    <table-calendar :render-days="26" />
   </div>
 </template>
 

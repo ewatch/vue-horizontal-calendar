@@ -21,4 +21,8 @@ function getMonthName(monthOfYear) {
   return monthNames[monthOfYear];
 }
 
-export { getDayName, getMonthName };
+function calculateRenderDays(amountOfDays) {
+  return Math.round((amountOfDays - 1) / 2);
+}
+
+export { getDayName, getMonthName, calculateRenderDays };
