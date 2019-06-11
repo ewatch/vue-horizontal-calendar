@@ -4,6 +4,7 @@
                    @input="selectedDate = $event.target.valueAsDate" />
     <table>
       <thead>
+        <th v-if="tableData.length > 0"></th>
         <table-head-cell
           v-for="date in dates"
           :class="{ today: equalsSelectedDate(date)}"
@@ -36,6 +37,10 @@ export default {
     date: {
       type: Date,
       default: () => new Date()
+    },
+    tableData: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -55,7 +60,7 @@ export default {
       }
 
       return dateArray;
-    }
+    },
   },
     methods: {
     getDayName: dateHelper.getDayName,
