@@ -125,6 +125,25 @@ describe('TableCalendar.vue', () => {
     })
   })
 
+  describe('the datepicker that is part of the component', () => {
+    const wrapper = componentFactory()
+
+    it('should have input component with the type date', () => {
+      expect(wrapper.find('input[type="date"]').exists()).toBeTruthy()
+    })
+
+    it('should have input component with the type date', () => {
+      expect(wrapper.find('input[type="date"]').exists()).toBeTruthy()
+    })
+
+    it('should set the selected date on change', () => {
+      const input = wrapper.find('input[type="date"]')
+      input.setValue("2020-01-01")
+      input.trigger('change')
+      expect(wrapper.vm.$data.selectedDate).toBe('')
+    })
+  })
+
   describe('the component should be able to receive data', () => {
     const testDate = new Date()
     const wrapper = componentFactory({ tableData: [{ 'id': 1, 'name': 'Resource 1', 'start-date': testDate, 'end-date': new Date(testDate.getDate() + 1) }] })
