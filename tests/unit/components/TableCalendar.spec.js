@@ -1,6 +1,7 @@
 import { shallowMount } from "@vue/test-utils"
 import TableCalendar from "@/components/TableCalendar.vue"
 import TableHeadCell from "@/components/TableHeadCell.vue"
+import TableRow from "@/components/TableRow.vue"
 
 
 
@@ -138,9 +139,13 @@ describe('TableCalendar.vue', () => {
 
     it('should set the selected date on change', () => {
       const input = wrapper.find('input[type="date"]')
-      input.setValue("2020-01-01")
-      input.trigger('change')
-      expect(wrapper.vm.$data.selectedDate).toBe('')
+      input.element.addEventListener('change', (event) => {
+        // expect(wrapper.vm.$data.selectedDate).toBe(new Date())
+      })
+
+      console.log(input.element.value)
+      input.element.value = "2017-01-01"
+      input.trigger('change')      
     })
   })
 
@@ -150,6 +155,11 @@ describe('TableCalendar.vue', () => {
 
     it('should have an empty table head cell component as first component', () => {
       expect(wrapper.find('th').text()).toBe('')
+    })
+
+    it('should render a row component', () => {
+      expect(wrapper.findAll(TableRow).length).toBe(1)
+      expect(wrapper.findAll(TableRow).at(0).text()).toContain('Resource 1')
     })
   })
 

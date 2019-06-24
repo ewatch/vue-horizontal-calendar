@@ -15,19 +15,24 @@
           @cell:clicked="setSelectedDate(date)"
         />
       </thead>
+      <tbody>
+        <table-row />
+      </tbody>
     </table>
   </div>
 </template>
 
 <script>
 import TableHeadCell from "./TableHeadCell.vue";
+import TableRow from "./TableRow.vue";
 import * as dateHelper from "../helper/date.js";
 
 const ONE_DAY_AS_MS = 86400000;
 
 export default {
   components: {
-    TableHeadCell
+    TableHeadCell,
+    TableRow
   },
   props: {
     renderDays: {
