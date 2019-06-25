@@ -16,7 +16,7 @@
         />
       </thead>
       <tbody>
-        <table-row />
+        <table-row v-for="element in tableData" v-bind:key="element.id" :title="element.name" :amountOfCells="renderDays"/>
       </tbody>
     </table>
   </div>

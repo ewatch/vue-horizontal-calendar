@@ -143,7 +143,7 @@ describe('TableCalendar.vue', () => {
         // expect(wrapper.vm.$data.selectedDate).toBe(new Date())
       })
 
-      console.log(input.element.value)
+      // console.log(input.element.value)
       input.element.value = "2017-01-01"
       input.trigger('change')      
     })
@@ -151,15 +151,25 @@ describe('TableCalendar.vue', () => {
 
   describe('the component should be able to receive data', () => {
     const testDate = new Date()
-    const wrapper = componentFactory({ tableData: [{ 'id': 1, 'name': 'Resource 1', 'start-date': testDate, 'end-date': new Date(testDate.getDate() + 1) }] })
+    const wrapper = componentFactory(
+      { tableData: 
+        [
+          { 'id': 1, 'name': 'Resource 1', 'start-date': testDate, 'end-date': new Date(testDate.getDate() + 1) },
+          { 'id': 2, 'name': 'Resource 2', 'start-date': new Date(testDate.getDate() + 4), 'end-date': new Date(testDate.getDate() + 10) },
+        ] 
+      })
 
     it('should have an empty table head cell component as first component', () => {
       expect(wrapper.find('th').text()).toBe('')
     })
 
-    it('should render a row component', () => {
-      expect(wrapper.findAll(TableRow).length).toBe(1)
-      expect(wrapper.findAll(TableRow).at(0).text()).toContain('Resource 1')
+    it('should render minimum one row component with a certain content', () => {
+      expect(wrapper.findAll(TableRow).length).toBeGreaterThanOrEqual(1)
+      expect(wrapper.findAll(TableRow).at(0).html()).toContain('Resource 1')
+    })
+
+    it('should render as many rows as provided elements in the tableData array', () => {
+      expect(wrapper.findAll(TableRow).length).toEqual(2)
     })
   })
 
