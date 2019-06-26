@@ -1,4 +1,4 @@
-# vue-horizontal-calendar
+# vue-horizontal-calendar [![Build Status](https://travis-ci.org/ewatch/vue-horizontal-calendar.svg?branch=master)](https://travis-ci.org/ewatch/vue-horizontal-calendar)
 
 ## Why did I start the project ?
 
