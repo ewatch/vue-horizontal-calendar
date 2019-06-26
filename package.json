@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "coveralls": "npm run test:unit  && cat ./tests/coverage/lcov.info | coveralls"
+    "coveralls": "npm run test:unit && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
