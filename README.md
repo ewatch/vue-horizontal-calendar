@@ -15,6 +15,39 @@ The visualization might make mostly sense in administrational environments.
 - visualize appartments and the days when they are free / booked
 - visualize cars for renting
 
+## How to use the comopnent ?
+
+Currently please clone the repository and run "npm run serve".
+After that you can visit "http://localhost:8080/"
+
+The VueJS framework must be globally available.
+
+```
+<table-calendar :render-days="26" :table-data="tableData" />
+```
+
+* render-days: the amount of days as cells the calendar should render
+* table-data: an array full of data to render the rows for the calendar
+
+Example:
+```
+tableData: [
+    { 
+        'id': 1, 
+        'name': 'Something Beautiful', 
+        'start-date': new Date(), 
+        'end-date': new Date() 
+    }, 
+    { 
+        'id': 2, 
+        'name': 
+        'Something else', 
+        'start-date': new Date(), 
+        'end-date': new Date() 
+    }
+]
+```
+
 ## Project setup
 ```
 npm install
