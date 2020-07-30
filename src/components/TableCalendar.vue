@@ -1,13 +1,16 @@
 <template>
   <div>
-    <input type="date" :value="selectedDate && selectedDate.toISOString().split('T')[0]"
-                   @input="selectedDate = $event.target.valueAsDate" />
+    <input
+      type="date"
+      :value="selectedDate && selectedDate.toISOString().split('T')[0]"
+      @input="selectedDate = $event.target.valueAsDate"
+    />
     <table>
       <thead>
         <th v-if="tableData.length > 0"></th>
         <table-head-cell
           v-for="date in dates"
-          :class="{ today: equalsSelectedDate(date)}"
+          :class="{ today: equalsSelectedDate(date) }"
           :day-of-month="date.getDate()"
           :day-name="getDayName(date.getDay())"
           :month-name="getMonthName(date.getMonth())"
@@ -16,7 +19,12 @@
         />
       </thead>
       <tbody>
-        <table-row v-for="element in tableData" v-bind:key="element.id" :title="element.name" :amountOfCells="renderDays"/>
+        <table-row
+          v-for="element in tableData"
+          v-bind:key="element.id"
+          :title="element.name"
+          :amountOfCells="renderDays"
+        />
       </tbody>
     </table>
   </div>
@@ -57,7 +65,9 @@ export default {
     dates: function() {
       let dateArray = [];
       const startDate = new Date(this.selectedDate);
-      const amountOfDaysBeforeAndAfter = dateHelper.calculateRenderDays(this.renderDays);
+      const amountOfDaysBeforeAndAfter = dateHelper.calculateRenderDays(
+        this.renderDays
+      );
 
       startDate.setDate(startDate.getDate() - amountOfDaysBeforeAndAfter);
       for (let i = 0; i < this.renderDays; i++) {
@@ -65,23 +75,25 @@ export default {
       }
 
       return dateArray;
-    },
+    }
   },
-    methods: {
+  methods: {
     getDayName: dateHelper.getDayName,
     getMonthName: dateHelper.getMonthName,
     setSelectedDate: function(date) {
       this.selectedDate = date;
     },
     equalsSelectedDate: function(date) {
-      return date.getDate() === this.selectedDate.getDate()
+      return date.getDate() === this.selectedDate.getDate();
     }
-  },
+  }
 };
 </script>
 
 <style>
-table, td, th {
+table,
+td,
+th {
   border: 1px solid black;
 }
 

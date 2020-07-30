@@ -16,8 +16,21 @@ export default {
   },
   data: function() {
     return {
-      tableData: [{ 'id': 1, 'name': 'Something Beautiful', 'start-date': exampleDate, 'end-date': new Date(exampleDate.getDate() + 1) }, { 'id': 2, 'name': 'Something else', 'start-date': exampleDate, 'end-date': new Date(exampleDate.getDate() + 1) }]
-    }
+      tableData: [
+        {
+          id: 1,
+          name: "Something Beautiful",
+          "start-date": exampleDate,
+          "end-date": new Date(exampleDate.getDate() + 1)
+        },
+        {
+          id: 2,
+          name: "Something else",
+          "start-date": exampleDate,
+          "end-date": new Date(exampleDate.getDate() + 1)
+        }
+      ]
+    };
   }
 };
 </script>

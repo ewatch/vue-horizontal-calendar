@@ -21,11 +21,11 @@ module.exports = {
   ],
   collectCoverage: true,
   collectCoverageFrom: [
-    '**/*.{vue}', 
-    '!**/node_modules/**', 
-    '!<rootDir>/dist/**',
-    '!<rootDir>/src/plugins/**', 
-    '!<rootDir>/tests/unit/**'
+    "**/*.{vue}",
+    "!**/node_modules/**",
+    "!<rootDir>/dist/**",
+    "!<rootDir>/src/plugins/**",
+    "!<rootDir>/tests/unit/**"
   ],
-  coverageReporters: ['lcov', 'text-summary']
+  coverageReporters: ["lcov", "text-summary"]
 };

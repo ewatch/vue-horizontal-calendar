@@ -2,6 +2,9 @@
 node_modules
 /dist
 
+# Coverage directory used by tools like istanbul
+coverage
+
 /tests/e2e/reports/
 selenium-debug.log
 

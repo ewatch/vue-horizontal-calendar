@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     onCellClicked: function() {
-      this.$emit('cell:clicked');
+      this.$emit("cell:clicked");
     }
   }
 };
