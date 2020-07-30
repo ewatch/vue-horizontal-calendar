@@ -6,8 +6,9 @@
 
 <script>
 import TableCalendar from "./components/TableCalendar.vue";
+import { days } from "./helper/date.js";
 
-let exampleDate = new Date();
+let todayDate = new Date().getTime();
 
 export default {
   name: "app",
@@ -20,14 +21,38 @@ export default {
         {
           id: 1,
           name: "Something Beautiful",
-          "start-date": exampleDate,
-          "end-date": new Date(exampleDate.getDate() + 1)
+          occupations: [
+            {
+              id: 1,
+              name: "Conference",
+              startDate: todayDate,
+              endDate: todayDate + days(2)
+            },
+            {
+              id: 2,
+              name: "Holliday",
+              startDate: todayDate + days(3),
+              endDate: todayDate + days(6)
+            }
+          ]
         },
         {
           id: 2,
           name: "Something else",
-          "start-date": exampleDate,
-          "end-date": new Date(exampleDate.getDate() + 1)
+          occupations: [
+            {
+              id: 1,
+              name: "Lunchparty",
+              startDate: todayDate - days(4),
+              endDate: todayDate
+            },
+            {
+              id: 2,
+              name: "Work",
+              startDate: todayDate + days(1),
+              endDate: todayDate + days(3)
+            }
+          ]
         }
       ]
     };

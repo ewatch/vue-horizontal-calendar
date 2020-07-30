@@ -7,7 +7,10 @@ module.exports = {
       .url(process.env.VUE_DEV_SERVER_URL)
       .waitForElementVisible("#app", 5000)
       .assert.elementPresent("table")
-      .assert.containsText("table > tbody > tr > td:first-child", "Something Beautiful")
+      .assert.containsText(
+        "table > tbody > tr > td:first-child",
+        "Something Beautiful"
+      )
       .assert.elementCount("td", 54)
       .end();
   }

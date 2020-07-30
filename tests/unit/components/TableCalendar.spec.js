@@ -98,7 +98,9 @@ describe("TableCalendar.vue", () => {
     const wrapper = componentFactory();
 
     it("should render a th with 1", () => {
-      expect(wrapper.findComponent(TableHeadCell).element.tagName).toBe('TABLE-HEAD-CELL-STUB');
+      expect(wrapper.findComponent(TableHeadCell).element.tagName).toBe(
+        "TABLE-HEAD-CELL-STUB"
+      );
     });
 
     it("should not have an empty table head cell component as first component", () => {
@@ -167,7 +169,9 @@ describe("TableCalendar.vue", () => {
     });
 
     it("should render minimum one row component with a certain content", () => {
-      expect(wrapper.findAllComponents(TableRow).length).toBeGreaterThanOrEqual(1);
+      expect(wrapper.findAllComponents(TableRow).length).toBeGreaterThanOrEqual(
+        1
+      );
       expect(
         wrapper
           .findAllComponents(TableRow)
