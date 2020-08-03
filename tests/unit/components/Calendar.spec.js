@@ -1,17 +1,17 @@
 import { shallowMount } from "@vue/test-utils";
-import TableCalendar from "@/components/TableCalendar.vue";
-import TableHeadCell from "@/components/TableHeadCell.vue";
-import TableRow from "@/components/TableRow.vue";
+import Calendar from "@/components/Calendar.vue";
+import HeadCell from "@/components/HeadCell.vue";
+import Row from "@/components/Row.vue";
 
 const componentFactory = propsData => {
-  return shallowMount(TableCalendar, {
+  return shallowMount(Calendar, {
     propsData: {
       ...propsData
     }
   });
 };
 
-describe("TableCalendar.vue", () => {
+describe("Calendar.vue", () => {
   it("exists", () => {
     const wrapper = componentFactory();
 
@@ -22,9 +22,9 @@ describe("TableCalendar.vue", () => {
     const wrapper = componentFactory();
 
     expect(wrapper.html()).toContain('class="today"');
-    expect(wrapper.findAllComponents(TableHeadCell).length).toBe(13);
+    expect(wrapper.findAllComponents(HeadCell).length).toBe(13);
 
-    const sixthHeadCell = wrapper.findAllComponents(TableHeadCell).at(6);
+    const sixthHeadCell = wrapper.findAllComponents(HeadCell).at(6);
     expect(sixthHeadCell.html()).toContain('class="today"');
   });
 
@@ -87,7 +87,7 @@ describe("TableCalendar.vue", () => {
     });
 
     it("should have a certain amount of elements", () => {
-      const result = TableCalendar.computed.dates.call(thisMock);
+      const result = Calendar.computed.dates.call(thisMock);
       expect(result.length).toBe(thisMock.renderDays);
       expect(typeof result[0]).toBe("object");
       expect(result[0].constructor).toBe(Date);
@@ -98,7 +98,7 @@ describe("TableCalendar.vue", () => {
     const wrapper = componentFactory();
 
     it("should render a th with 1", () => {
-      expect(wrapper.findComponent(TableHeadCell).element.tagName).toBe(
+      expect(wrapper.findComponent(HeadCell).element.tagName).toBe(
         "TABLE-HEAD-CELL-STUB"
       );
     });
@@ -169,19 +169,17 @@ describe("TableCalendar.vue", () => {
     });
 
     it("should render minimum one row component with a certain content", () => {
-      expect(wrapper.findAllComponents(TableRow).length).toBeGreaterThanOrEqual(
-        1
-      );
+      expect(wrapper.findAllComponents(Row).length).toBeGreaterThanOrEqual(1);
       expect(
         wrapper
-          .findAllComponents(TableRow)
+          .findAllComponents(Row)
           .at(0)
           .html()
       ).toContain("Resource 1");
     });
 
     it("should render as many rows as provided elements in the tableData array", () => {
-      expect(wrapper.findAllComponents(TableRow).length).toEqual(2);
+      expect(wrapper.findAllComponents(Row).length).toEqual(2);
     });
   });
 });

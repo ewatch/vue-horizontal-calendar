@@ -1,15 +1,15 @@
 import { shallowMount } from "@vue/test-utils";
-import TableRow from "@/components/TableRow.vue";
+import Row from "@/components/Row.vue";
 
 const componentFactory = propsData => {
-  return shallowMount(TableRow, {
+  return shallowMount(Row, {
     propsData: {
       ...propsData
     }
   });
 };
 
-describe("TableRow.vue", () => {
+describe("Row.vue", () => {
   it("exists", () => {
     const wrapper = componentFactory();
 

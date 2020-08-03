@@ -27,7 +27,7 @@ function calculateRenderDays(amountOfDays) {
 
 function days(n) {
   const ONE_DAY_AS_MS = 86400000;
-  return n * ONE_DAY_AS_MS
+  return n * ONE_DAY_AS_MS;
 }
 
 export { getDayName, getMonthName, calculateRenderDays, days };

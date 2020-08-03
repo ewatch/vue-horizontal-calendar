@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <table-calendar :render-days="26" :table-data="tableData" />
+    <calendar :render-days="26" :table-data="tableData" />
   </div>
 </template>
 
 <script>
-import TableCalendar from "./components/TableCalendar.vue";
+import Calendar from "./components/Calendar.vue";
 import { days } from "./helper/date.js";
 
 let todayDate = new Date().getTime();
@@ -13,7 +13,7 @@ let todayDate = new Date().getTime();
 export default {
   name: "app",
   components: {
-    TableCalendar
+    Calendar
   },
   data: function() {
     return {
@@ -31,7 +31,7 @@ export default {
             {
               id: 2,
               name: "Holliday",
-              startDate: todayDate + days(3),
+              startDate: todayDate + days(2),
               endDate: todayDate + days(6)
             }
           ]
