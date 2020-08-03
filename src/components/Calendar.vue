@@ -22,6 +22,8 @@
       v-bind:key="element.id"
       :title="element.name"
       :dates="datesWithOccupations(dates, element.occupations)"
+      :occupations="element.occupations"
+      :labelWidth="labelWidth"
     />
   </div>
 </template>
@@ -52,7 +54,8 @@ export default {
   },
   data() {
     return {
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      labelWidth: 200 // keep in sync with css var
     };
   },
   computed: {
@@ -137,6 +140,10 @@ export default {
 $labelWidth: 200px;
 $cellWidth: 50px;
 
+* {
+  box-sizing: border-box;
+}
+
 .outer {
   overflow-y: scroll;
 }
@@ -160,10 +167,23 @@ $cellWidth: 50px;
 
 .cell {
   width: $cellWidth;
+  height: $cellWidth;
   flex: 0 0 $cellWidth;
+  background-color: lightgrey;
+  border-radius: 4px;
 }
 
 .today {
   border: 5px solid blue;
+}
+
+.occupation {
+  position: absolute;
+  top: 0;
+  padding-left: 20px;
+  text-align: left;
+  opacity: 0.6;
+  background-color: cornflowerblue;
+  border-radius: 20px;
 }
 </style>

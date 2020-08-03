@@ -32,7 +32,8 @@ export default {
               id: 2,
               name: "Holliday",
               startDate: todayDate + days(2),
-              endDate: todayDate + days(6)
+              endDate: todayDate + days(6),
+              background: "orange"
             }
           ]
         },
@@ -44,7 +45,8 @@ export default {
               id: 1,
               name: "Lunchparty",
               startDate: todayDate - days(4),
-              endDate: todayDate
+              endDate: todayDate,
+              background: "orange"
             },
             {
               id: 2,
