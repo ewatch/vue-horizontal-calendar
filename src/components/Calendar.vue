@@ -5,6 +5,15 @@
       :value="selectedDate && selectedDate.toISOString().split('T')[0]"
       @input="selectedDate = $event.target.valueAsDate"
     />
+    <select @change="setSelectedDate(new Date(2020, monthIndex, 1))" v-model="monthIndex">
+      <option
+              v-for="(monthName, index) in monthNames"
+              :key="monthName"
+              :value="index"
+      >
+        {{ monthName }}
+      </option>
+    </select>
     <div class="wrapper">
       <div class="label" v-if="calendarData.length > 0">Items</div>
       <head-cell
@@ -55,7 +64,9 @@ export default {
   data() {
     return {
       selectedDate: new Date(),
-      labelWidth: 200 // keep in sync with css var
+      labelWidth: 200, // keep in sync with css var
+      monthNames: dateHelper.monthNames,
+      monthIndex: this.date.getMonth(),
     };
   },
   computed: {

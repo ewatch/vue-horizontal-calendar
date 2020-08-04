@@ -3,21 +3,22 @@ function getDayName(dayOfWeek) {
   return dayNames[dayOfWeek];
 }
 
+const monthNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+
 function getMonthName(monthOfYear) {
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
   return monthNames[monthOfYear];
 }
 
@@ -30,4 +31,4 @@ function days(n) {
   return n * ONE_DAY_AS_MS;
 }
 
-export { getDayName, getMonthName, calculateRenderDays, days };
+export { monthNames, getDayName, getMonthName, calculateRenderDays, days };
