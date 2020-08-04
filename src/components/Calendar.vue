@@ -1,5 +1,5 @@
 <template>
-	<div class="outer">
+	<div class="outer" :style="cssVars">
 		<input
 			type="date"
 			:value="selectedDate && selectedDate.toISOString().split('T')[0]"
@@ -21,6 +21,14 @@
 				{{ monthName }}
 			</option>
 		</select>
+		Density:
+		<input
+			type="number"
+			min="10"
+			max="100"
+			:value="cellWidth"
+			@change="cellWidth = $event.target.value"
+		/>
 		<div class="wrapper">
 			<div class="label" v-if="calendarData.length > 0">Items</div>
 			<div class="cells">
@@ -79,13 +87,19 @@ export default {
 	data() {
 		return {
 			selectedDate: new Date(),
-			labelWidth: 200, // keep in sync with css var
-			cellWidth: 50, // keep in sync with css var
+			labelWidth: 200,
+			cellWidth: 50,
 			monthNames: dateHelper.monthNames,
 			monthIndex: this.date.getMonth()
 		};
 	},
 	computed: {
+		cssVars() {
+			return {
+				"--label-width": this.labelWidth + "px",
+				"--cell-width": this.cellWidth + "px"
+			};
+		},
 		dates: function() {
 			let dateArray = [];
 			let startDate = new Date(this.selectedDate);
@@ -119,14 +133,14 @@ export default {
 						const markDate = new Date(mark.date);
 
 						// same day?
-					if (
+						if (
 							markDate.getFullYear() === date.getFullYear() &&
 							markDate.getMonth() === date.getMonth() &&
 							markDate.getDate() === date.getDate()
-					) {
+						) {
 							marking = { id: mark.id, name: mark.name };
-					}
-				});
+						}
+					});
 				}
 
 				dateArray.push({ date, marking });
@@ -139,9 +153,6 @@ export default {
 </script>
 
 <style lang="scss">
-$labelWidth: 200px;
-$cellWidth: 50px;
-
 * {
 	box-sizing: border-box;
 }
@@ -154,7 +165,7 @@ $cellWidth: 50px;
 .wrapper {
 	display: flex;
 	position: relative;
-	padding-left: $labelWidth;
+	padding-left: var(--label-width);
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 	border-bottom: 1px solid grey;
@@ -184,13 +195,13 @@ $cellWidth: 50px;
 	position: absolute;
 	left: 0;
 	top: 0;
-	width: $labelWidth;
+	width: var(--label-width);
 }
 
 .cell {
-	width: $cellWidth;
-	height: $cellWidth;
-	flex: 0 0 $cellWidth;
+	width: var(--cell-width);
+	height: 50px;
+	flex: 0 0 var(--cell-width);
 	background-color: lightgrey;
 	border-radius: 4px;
 
