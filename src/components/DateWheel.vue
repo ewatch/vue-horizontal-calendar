@@ -4,6 +4,7 @@
 		@mousedown="startDrag"
 		@mousemove="doDrag"
 		@mouseup="stopDrag"
+		@mouseout="stopDrag"
 	></div>
 </template>
 
