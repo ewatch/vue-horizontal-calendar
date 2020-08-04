@@ -101,20 +101,6 @@ describe("Calendar.vue", () => {
 		});
 	});
 
-	describe("method to compare provided date to selected one", () => {
-		const testDate = new Date();
-		const wrapper = componentFactory({ date: testDate });
-
-		it("should return true if dates are equal", () => {
-			expect(wrapper.vm.equalsSelectedDate(testDate)).toBe(true);
-		});
-
-		it("should return false if dates are not equal", () => {
-			const newDate = new Date(testDate.getDate() + 1);
-			expect(wrapper.vm.equalsSelectedDate(newDate)).toBe(false);
-		});
-	});
-
 	describe("the datepicker that is part of the component", () => {
 		const wrapper = componentFactory();
 

@@ -22,13 +22,9 @@ function getMonthName(monthOfYear) {
 	return monthNames[monthOfYear];
 }
 
-function calculateRenderDays(amountOfDays) {
-	return Math.round((amountOfDays - 1) / 2);
-}
-
 function days(n) {
 	const ONE_DAY_AS_MS = 86400000;
 	return n * ONE_DAY_AS_MS;
 }
 
-export { monthNames, getDayName, getMonthName, calculateRenderDays, days };
+export { monthNames, getDayName, getMonthName, days };

@@ -42,14 +42,4 @@ describe("test helper functions", () => {
 		expect(monthName).toBe("Dec");
 		expect(typeof monthName).toBe("string");
 	});
-
-	it("have a method to calculate the amount of days that should be rendered before / after the current day", () => {
-		const amountOfDays = dateHelper.calculateRenderDays(13);
-		expect(amountOfDays).toBe(6);
-	});
-
-	it("have a method to calculate the amount of days that should be rendered before / after the current day", () => {
-		const amountOfDays = dateHelper.calculateRenderDays(12);
-		expect(amountOfDays).toBe(6);
-	});
 });

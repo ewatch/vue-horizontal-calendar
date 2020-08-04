@@ -8,7 +8,7 @@
 		<select
 			@change="
 				setSelectedDate(
-					new Date(new Date().getFullYear(), monthIndex, 15)
+					new Date(new Date().getFullYear(), monthIndex, 1)
 				)
 			"
 			v-model="monthIndex"
@@ -26,7 +26,6 @@
 			<div class="cells">
 				<head-cell
 					v-for="date in dates"
-					:class="{ today: equalsSelectedDate(date) }"
 					:day-of-month="date.getDate()"
 					:day-name="getDayName(date.getDay())"
 					:month-name="getMonthName(date.getMonth())"
@@ -90,17 +89,12 @@ export default {
 		dates: function() {
 			let dateArray = [];
 			let startDate = new Date(this.selectedDate);
-			const amountOfDaysBeforeAndAfter = dateHelper.calculateRenderDays(
-				this.renderDays
+
+			dateArray.push(
+				new Date(startDate.setDate(startDate.getDate()))
 			);
 
-			startDate = new Date(
-				startDate.setDate(
-					startDate.getDate() - amountOfDaysBeforeAndAfter
-				)
-			);
-
-			for (let i = 0; i < this.renderDays; i++) {
+			for (let i = 1; i < this.renderDays; i++) {
 				dateArray.push(
 					new Date(startDate.setDate(startDate.getDate() + 1))
 				);
@@ -114,9 +108,6 @@ export default {
 		getMonthName: dateHelper.getMonthName,
 		setSelectedDate: function(date) {
 			this.selectedDate = date;
-		},
-		equalsSelectedDate: function(date) {
-			return date.getDate() === this.selectedDate.getDate();
 		},
 		datesWithOccupations: (dates, occupations) => {
 			let dateArray = [];
@@ -237,10 +228,6 @@ $cellWidth: 50px;
 			cursor: grabbing;
 		}
 	}
-}
-
-.today {
-	border: 5px solid blue;
 }
 
 .occupation {
