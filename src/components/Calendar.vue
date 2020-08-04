@@ -36,13 +36,14 @@
       :dates="datesWithOccupations(dates, element.occupations)"
       :occupations="element.occupations"
       :labelWidth="labelWidth"
+      :cellWidth="cellWidth"
     />
   </div>
 </template>
 
 <script>
-import HeadCell from "./HeadCell.vue";
-import Row from "./Row.vue";
+import HeadCell from "./HeadCell";
+import Row from "./Row";
 import * as dateHelper from "../helper/date.js";
 
 export default {
@@ -68,6 +69,7 @@ export default {
     return {
       selectedDate: new Date(),
       labelWidth: 200, // keep in sync with css var
+      cellWidth: 50, // keep in sync with css var
       monthNames: dateHelper.monthNames,
       monthIndex: this.date.getMonth()
     };

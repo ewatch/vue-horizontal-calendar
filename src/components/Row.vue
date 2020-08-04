@@ -17,69 +17,29 @@
       <!--        </div>-->
       <!--      </template>-->
     </div>
-    <template v-for="occupied in occupations">
-      <div
-        :class="[
-          'occupation',
-          !!daysBeforeScheduleDateRange(
-            occupied.startDate,
-            scheduleStartDate
-          ) && 'occupation--startoff',
-          !!daysAfterScheduleDateRange(occupied.endDate, scheduleEndDate) &&
-            'occupation--endoff'
-        ]"
-        v-if="
-          isInsideScheduleView(
-            scheduleStartDate,
-            scheduleEndDate,
-            occupied.startDate,
-            occupied.endDate
-          )
-        "
-        :key="occupied.id"
-        :style="
-          `width: ${(daysInDateRange(occupied.startDate, occupied.endDate) -
-            daysBeforeScheduleDateRange(occupied.startDate, scheduleStartDate) +
-            daysAfterScheduleDateRange(occupied.endDate, scheduleEndDate)) *
-            50}px;
-           left: ${(daysInDateRange(scheduleStartDate, occupied.startDate) -
-             1 +
-             daysBeforeScheduleDateRange(
-               occupied.startDate,
-               scheduleStartDate
-             )) *
-             50 +
-             labelWidth}px;
-           background-color: ${occupied.background}
-           `
-        "
-      >
-        <span>
-          {{ occupied.name }}
-          <br />
-          {{
-            new Date(occupied.startDate).getDate() +
-              ". " +
-              (new Date(occupied.startDate).getMonth() + 1) +
-              "."
-          }}
-          -
-          {{
-            new Date(occupied.endDate).getDate() +
-              ". " +
-              (new Date(occupied.endDate).getMonth() + 1) +
-              "."
-          }}
-        </span>
-      </div>
-    </template>
+    <occupation
+            v-for="occupation in occupations"
+            :name="occupation.name"
+            :startDate="occupation.startDate"
+            :endDate="occupation.endDate"
+            :scheduleStartDate="scheduleStartDate"
+            :scheduleEndDate="scheduleEndDate"
+            :background="occupation.background"
+            :labelWidth="labelWidth"
+            :cellWidth="cellWidth"
+            :key="occupation.id"
+    />
   </div>
 </template>
 
 <script>
 import * as dateHelper from "../helper/date";
+import Occupation from "./Occupation";
 
 export default {
+  components: {
+    Occupation
+  },
   props: {
     title: {
       type: String,
@@ -96,6 +56,10 @@ export default {
     labelWidth: {
       type: Number,
       default: 200
+    },
+    cellWidth: {
+      type: Number,
+      default: 50
     }
   },
   computed: {
@@ -112,55 +76,6 @@ export default {
   methods: {
     getDayName: dateHelper.getDayName,
     getMonthName: dateHelper.getMonthName,
-    daysInDateRange: (firstDate, secondDate) => {
-      // full days including the day itself
-      const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-
-      const firstStart = new Date(firstDate);
-      firstStart.setHours(0, 0, 0, 0);
-      const secondEnd = new Date(secondDate);
-      secondEnd.setHours(12, 0, 0, 1);
-
-      const diffTime = secondEnd - firstStart;
-      const diffDays = Math.round(Math.abs(diffTime / oneDay));
-
-      if (diffTime < 0) {
-        return -1 * diffDays;
-      }
-      return diffDays;
-    },
-    daysBeforeScheduleDateRange(startDate, scheduleStartDate) {
-      const daysOver = this.daysInDateRange(startDate, scheduleStartDate) - 1;
-
-      if (daysOver < 0) {
-        return 0;
-      }
-      return daysOver;
-    },
-    daysAfterScheduleDateRange(endDate, scheduleEndDate) {
-      const daysOver = this.daysInDateRange(endDate, scheduleEndDate) - 1;
-      if (daysOver > 0) {
-        return 0;
-      }
-      return daysOver;
-    },
-    isInsideScheduleView(
-      scheduleStartDate,
-      scheduleEndDate,
-      startDate,
-      endDate
-    ) {
-      const isNotBeforeView =
-        this.daysInDateRange(scheduleStartDate, startDate) +
-          this.daysInDateRange(startDate, endDate) >
-        1;
-      const isNotAfterView =
-        this.daysInDateRange(endDate, scheduleEndDate) +
-          this.daysInDateRange(startDate, endDate) >
-        1;
-
-      return isNotBeforeView && isNotAfterView;
-    }
   }
 };
 </script>

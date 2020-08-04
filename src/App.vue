@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Calendar from "./components/Calendar.vue";
+import Calendar from "./components/Calendar";
 import { days } from "./helper/date.js";
 
 let todayDate = new Date().getTime();
@@ -34,6 +34,13 @@ export default {
               startDate: todayDate + days(2),
               endDate: todayDate + days(6),
               background: "orange"
+            },
+            {
+              id: 3,
+              name: "invalid dates",
+              startDate: null,
+              endDate: null,
+              background: undefined
             }
           ]
         },
