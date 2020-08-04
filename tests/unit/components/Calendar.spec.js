@@ -2,6 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import Calendar from "@/components/Calendar.vue";
 import HeadCell from "@/components/HeadCell.vue";
 import Row from "@/components/Row.vue";
+import {days} from "../../../src/helper/date";
 
 const componentFactory = propsData => {
   return shallowMount(Calendar, {
@@ -18,14 +19,10 @@ describe("Calendar.vue", () => {
     expect(wrapper).toBeDefined();
   });
 
-  it('should have an element as marked being "today"', () => {
+  it('should render a default amount of head cells', () => {
     const wrapper = componentFactory();
 
-    expect(wrapper.html()).toContain('class="today"');
     expect(wrapper.findAllComponents(HeadCell).length).toBe(13);
-
-    const sixthHeadCell = wrapper.findAllComponents(HeadCell).at(6);
-    expect(sixthHeadCell.html()).toContain('class="today"');
   });
 
   describe("test properties", () => {
@@ -65,7 +62,7 @@ describe("Calendar.vue", () => {
 
     describe("should have prop for the array data to be rendered as rows", () => {
       const wrapper = componentFactory();
-      const dataProp = wrapper.vm.$options.props.tableData;
+      const dataProp = wrapper.vm.$options.props.calendarData;
 
       it("should be of type Array", () => {
         expect(dataProp.type).toBe(Array);
@@ -97,14 +94,10 @@ describe("Calendar.vue", () => {
   describe("test minimal rendering of the component", () => {
     const wrapper = componentFactory();
 
-    it("should render a th with 1", () => {
+    it("should render a name stub", () => {
       expect(wrapper.findComponent(HeadCell).element.tagName).toBe(
-        "TABLE-HEAD-CELL-STUB"
+        "HEAD-CELL-STUB"
       );
-    });
-
-    it("should not have an empty table head cell component as first component", () => {
-      expect(wrapper.find("th").exists()).toBeFalsy();
     });
   });
 
@@ -129,43 +122,75 @@ describe("Calendar.vue", () => {
       expect(wrapper.find('input[type="date"]').exists()).toBeTruthy();
     });
 
-    it("should have input component with the type date", () => {
-      expect(wrapper.find('input[type="date"]').exists()).toBeTruthy();
-    });
-
-    it("should set the selected date on change", () => {
-      const input = wrapper.find('input[type="date"]');
-      input.element.addEventListener("change", event => {
-        // expect(wrapper.vm.$data.selectedDate).toBe(new Date())
-      });
-
-      // console.log(input.element.value)
-      input.element.value = "2017-01-01";
-      input.trigger("change");
-    });
+    // it("should set the selected date on change", () => {
+    //   const input = wrapper.find('input[type="date"]');
+    //
+    //   input.element.value = '2017-1-1';
+    //   input.trigger("input");
+    //   expect(wrapper.vm.$data.selectedDate).toBe(new Date(2017,1,1))
+    // });
   });
 
   describe("the component should be able to receive data", () => {
-    const testDate = new Date();
+    const todayDate = new Date();
     const wrapper = componentFactory({
-      tableData: [
+      calendarData: [
         {
           id: 1,
-          name: "Resource 1",
-          "start-date": testDate,
-          "end-date": new Date(testDate.getDate() + 1)
+          name: "Something Beautiful",
+          occupations: [
+            {
+              id: 1,
+              name: "Conference",
+              startDate: todayDate,
+              endDate: todayDate + days(2)
+            },
+            {
+              id: 2,
+              name: "Holliday",
+              startDate: todayDate + days(2),
+              endDate: todayDate + days(6),
+              background: "orange"
+            }
+          ]
         },
         {
           id: 2,
-          name: "Resource 2",
-          "start-date": new Date(testDate.getDate() + 4),
-          "end-date": new Date(testDate.getDate() + 10)
+          name: "Something else",
+          occupations: [
+            {
+              id: 1,
+              name: "Lunchparty",
+              startDate: todayDate - days(8),
+              endDate: todayDate,
+              background: "orange"
+            },
+            {
+              id: 2,
+              name: "Work",
+              startDate: todayDate + days(1),
+              endDate: todayDate + days(3)
+            }
+          ]
+        },
+        {
+          id: 3,
+          name: "Super long",
+          occupations: [
+            {
+              id: 1,
+              name: "Super Long Booking",
+              startDate: todayDate - days(33),
+              endDate: todayDate + days(33),
+              background: "lightsalmon"
+            }
+          ]
         }
       ]
     });
 
     it("should have an empty table head cell component as first component", () => {
-      expect(wrapper.find("th").text()).toBe("");
+      expect(wrapper.find("div.label").text()).toBe("Items");
     });
 
     it("should render minimum one row component with a certain content", () => {
@@ -175,11 +200,11 @@ describe("Calendar.vue", () => {
           .findAllComponents(Row)
           .at(0)
           .html()
-      ).toContain("Resource 1");
+      ).toContain("Something Beautiful");
     });
 
-    it("should render as many rows as provided elements in the tableData array", () => {
-      expect(wrapper.findAllComponents(Row).length).toEqual(2);
+    it("should render as many rows as provided elements in the data array", () => {
+      expect(wrapper.findAllComponents(Row).length).toEqual(3);
     });
   });
 });

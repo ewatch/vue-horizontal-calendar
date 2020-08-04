@@ -11,7 +11,7 @@ const componentFactory = propsData => {
   });
 };
 
-describe("CharacterCounter.vue", () => {
+describe("HeadCell.vue", () => {
   it("exists", () => {
     const wrapper = componentFactory();
 
@@ -75,30 +75,22 @@ describe("CharacterCounter.vue", () => {
     });
   });
 
-  describe("test minimal rendering of the component", () => {
-    const wrapper = componentFactory();
-
-    it("should render a th with 1", () => {
-      expect(wrapper.find("th").text()).toBe("1");
-    });
-  });
-
   describe("test maximal rendering of the component", () => {
     const wrapper = componentFactory({
       dayName: "Monday",
       monthName: "February"
     });
 
-    it("should render a th containing 1", () => {
-      expect(wrapper.find("th").text()).toContain("1");
+    it("should render a div.cell containing 1", () => {
+      expect(wrapper.find("div.cell").text()).toContain("1");
     });
 
     it("should render a th containing the dayName", () => {
-      expect(wrapper.find("th").text()).toContain("Monday");
+      expect(wrapper.find("div.cell").text()).toContain("Monday");
     });
 
-    it("should render a th containing the dayName", () => {
-      expect(wrapper.find("th").text()).toContain("February");
+    it("should render a th containing the monthName", () => {
+      expect(wrapper.find("div.cell").text()).toContain("February");
     });
   });
 

@@ -26,12 +26,21 @@ describe("Row.vue", () => {
       });
     });
 
-    describe("should have amountOfCells prop", () => {
+    describe("should have dates prop", () => {
       const wrapper = componentFactory();
-      const amountOfCells = wrapper.vm.$options.props.amountOfCells;
+      const dates = wrapper.vm.$options.props.dates;
 
-      it("should be of type Number", () => {
-        expect(amountOfCells.type).toBe(Number);
+      it("should be of type Array", () => {
+        expect(dates.type).toBe(Array);
+      });
+    });
+
+    describe("should have occupations prop", () => {
+      const wrapper = componentFactory();
+      const occupations = wrapper.vm.$options.props.occupations;
+
+      it("should be of type Array", () => {
+        expect(occupations.type).toBe(Array);
       });
     });
   });
@@ -43,16 +52,16 @@ describe("Row.vue", () => {
       expect(wrapper.html()).toContain("Test");
     });
 
-    it("should render a tr-tag", () => {
+    it("should render a div.wrapper tag", () => {
       const wrapper = componentFactory({ title: "Test" });
 
-      expect(wrapper.findAll("tr").length).toEqual(1);
+      expect(wrapper.findAll("div.wrapper").length).toEqual(1);
     });
 
-    it("should render a certain amount of td-tags", () => {
-      const wrapper = componentFactory({ title: "Test", amountOfCells: 5 });
+    it("should render a certain amount of div.cell tags", () => {
+      const wrapper = componentFactory({ title: "Test", dates: [{date: new Date(1)},{date: new Date(1000)},{date: new Date(10000)},{date: new Date(1000000)},{date: new Date(100000000)}] });
 
-      expect(wrapper.findAll("td").length).toEqual(6);
+      expect(wrapper.findAll("div.cell").length).toEqual(5);
     });
   });
 });
