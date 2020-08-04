@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
-/dist
+# github pages
+# /dist
 
 # Coverage directory used by tools like istanbul
 coverage
