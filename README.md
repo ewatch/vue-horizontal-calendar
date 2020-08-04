@@ -1,6 +1,6 @@
-# vue-horizontal-calendar 
-[![Build Status](https://travis-ci.org/ewatch/vue-horizontal-calendar.svg?branch=master)](https://travis-ci.org/ewatch/vue-horizontal-calendar)
-[![Coverage Status](https://coveralls.io/repos/github/ewatch/vue-horizontal-calendar/badge.svg?branch=master)](https://coveralls.io/github/ewatch/vue-horizontal-calendar?branch=master)
+# vue-horizontal-calendar
+[![Build Status](https://travis-ci.org/AndreKelling/vue-horizontal-calendar.svg?branch=master)](https://travis-ci.org/AndreKelling/vue-horizontal-calendar)
+[![Coverage Status](https://coveralls.io/repos/github/AndreKelling/vue-horizontal-calendar/badge.svg?branch=master)](https://coveralls.io/github/AndreKelling/vue-horizontal-calendar?branch=master)
 
 ## Why did I start the project ?
 
@@ -15,7 +15,7 @@ The visualization might make mostly sense in administrational environments.
 - visualize appartments and the days when they are free / booked
 - visualize cars for renting
 
-## How to use the comopnent ?
+## How to use the component ?
 
 Currently please clone the repository and run "npm run serve".
 After that you can visit "http://localhost:8080/"
@@ -23,28 +23,78 @@ After that you can visit "http://localhost:8080/"
 The VueJS framework must be globally available.
 
 ```
-<table-calendar :render-days="26" :table-data="tableData" />
+<calendar :render-days="26" :calendar-data="tableData" />
 ```
 
 * render-days: the amount of days as cells the calendar should render
-* table-data: an array full of data to render the rows for the calendar
+* calendar-data: an array full of data to render the rows for the calendar
 
 Example:
 ```
-tableData: [
-    { 
-        'id': 1, 
-        'name': 'Something Beautiful', 
-        'start-date': new Date(), 
-        'end-date': new Date() 
-    }, 
-    { 
-        'id': 2, 
-        'name': 
-        'Something else', 
-        'start-date': new Date(), 
-        'end-date': new Date() 
-    }
+data: [
+	{
+		id: 1,
+		name: "Something Beautiful",
+		occupations: [
+			{
+				id: 1,
+				name: "Conference",
+				startDate: todayDate,
+				endDate: todayDate + days(2)
+			},
+			{
+				id: 2,
+				name: "Holliday",
+				startDate: todayDate + days(2),
+				endDate: todayDate + days(6),
+				background: "orange"
+			}
+		],
+		marks: [
+			{
+				id: 1,
+				name: "Arrival",
+				date: todayDate + days(8)
+			},
+			{
+				id: 2,
+				name: "Arrival",
+				date: todayDate + days(10)
+			}
+		]
+	},
+	{
+		id: 2,
+		name: "Something else",
+		occupations: [
+			{
+				id: 1,
+				name: "Lunchparty",
+				startDate: todayDate - days(8),
+				endDate: todayDate,
+				background: "orange"
+			},
+			{
+				id: 2,
+				name: "Work",
+				startDate: todayDate + days(1),
+				endDate: todayDate + days(3)
+			}
+		]
+	},
+	{
+		id: 3,
+		name: "Super long",
+		occupations: [
+			{
+				id: 1,
+				name: "Super Long Booking",
+				startDate: todayDate - days(33),
+				endDate: todayDate + days(33),
+				background: "lightsalmon"
+			}
+		]
+	}
 ]
 ```
 
@@ -61,11 +111,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files
