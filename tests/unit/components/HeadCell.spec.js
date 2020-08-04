@@ -85,22 +85,12 @@ describe("HeadCell.vue", () => {
 			expect(wrapper.find("div.cell").text()).toContain("1");
 		});
 
-		it("should render a th containing the dayName", () => {
+		it("should render a div.cell containing the dayName", () => {
 			expect(wrapper.find("div.cell").text()).toContain("Monday");
 		});
 
-		it("should render a th containing the monthName", () => {
+		it("should render a div.cell containing the monthName", () => {
 			expect(wrapper.find("div.cell").text()).toContain("February");
-		});
-	});
-
-	describe("behaviour of the component", () => {
-		it("should emit an event when click on the table head cell", () => {
-			const wrapper = componentFactory();
-
-			wrapper.trigger("click");
-
-			expect(wrapper.emitted("cell:clicked")).toHaveLength(1);
 		});
 	});
 });

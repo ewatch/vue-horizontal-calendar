@@ -17,7 +17,7 @@ module.exports = {
 				"div.occupation.occupation--startoff.occupation--endoff",
 				1
 			) // the one super long occupation
-			.assert.elementCount("div.cell", 104)
+			.assert.elementCount("div.cell", 124)
 			.end();
 	}
 };
