@@ -42,7 +42,7 @@
 			v-for="element in calendarData"
 			v-bind:key="element.id"
 			:title="element.name"
-			:dates="datesWithOccupations(dates, element.occupations)"
+			:dates="datesWithMarks(dates, element.marks)"
 			:occupations="element.occupations"
 			:labelWidth="labelWidth"
 			:cellWidth="cellWidth"
@@ -90,9 +90,7 @@ export default {
 			let dateArray = [];
 			let startDate = new Date(this.selectedDate);
 
-			dateArray.push(
-				new Date(startDate.setDate(startDate.getDate()))
-			);
+			dateArray.push(new Date(startDate.setDate(startDate.getDate())));
 
 			for (let i = 1; i < this.renderDays; i++) {
 				dateArray.push(
@@ -109,52 +107,29 @@ export default {
 		setSelectedDate: function(date) {
 			this.selectedDate = date;
 		},
-		datesWithOccupations: (dates, occupations) => {
+		datesWithMarks: (dates, marks) => {
 			let dateArray = [];
 
-			dates.forEach((date, index) => {
-				const dateTimestamp = date.getTime();
+			dates.forEach(date => {
+				let marking = null;
 
-				const occupi = occupations.map(occupation => {
-					const startDateStart = new Date(occupation.startDate);
-					startDateStart.setHours(0, 0, 0, 0);
-					const startDateEnd = new Date(occupation.startDate);
-					startDateEnd.setHours(23, 59, 59, 999);
+				if (marks) {
+					// @todo: better than brute force?!
+					marks.forEach(mark => {
+						const markDate = new Date(mark.date);
 
+						// same day?
 					if (
-						startDateStart.getTime() < dateTimestamp &&
-						startDateEnd.getTime() > dateTimestamp
+							markDate.getFullYear() === date.getFullYear() &&
+							markDate.getMonth() === date.getMonth() &&
+							markDate.getDate() === date.getDate()
 					) {
-						return {
-							id: occupation.id,
-							type: "start",
-							state: true
-						};
+							marking = { id: mark.id, name: mark.name };
 					}
-
-					const endDateStart = new Date(occupation.endDate);
-					endDateStart.setHours(0, 0, 0, 0);
-					const endDateEnd = new Date(occupation.endDate);
-					endDateEnd.setHours(23, 59, 59, 999);
-
-					if (
-						endDateStart.getTime() < dateTimestamp &&
-						endDateEnd.getTime() > dateTimestamp
-					) {
-						return { id: occupation.id, type: "end", state: true };
-					}
-
-					if (
-						occupation.startDate < dateTimestamp &&
-						occupation.endDate > dateTimestamp
-					) {
-						return { id: occupation.id, type: "is", state: true };
-					}
-
-					return { id: occupation.id, type: "", state: false };
 				});
+				}
 
-				dateArray.push({ date, occupi });
+				dateArray.push({ date, marking });
 			});
 
 			return dateArray;

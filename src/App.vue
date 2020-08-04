@@ -42,6 +42,18 @@ export default {
 							endDate: null,
 							background: undefined
 						}
+					],
+					marks: [
+						{
+							id: 1,
+							name: "Arrival",
+							date: todayDate + days(8)
+						},
+						{
+							id: 2,
+							name: "Arrival",
+							date: todayDate + days(10)
+						}
 					]
 				},
 				{

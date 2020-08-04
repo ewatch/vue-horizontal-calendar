@@ -7,15 +7,12 @@
 			:key="date.date.getTime()"
 			:class="cssClass"
 		>
-			<!--      {{ date.date.getDate() }}-->
-			<!--      <div>{{ getDayName(date.date.getDay()) }}</div>-->
-			<!--      <div>{{ getMonthName(date.date.getMonth()) }}</div>-->
-			<!--      @todo: might come handy for single day marks -->
-			<!--      <template v-for="occupied in date.occupi">-->
-			<!--        <div :key="occupied.id" v-if="occupied.state" style="margin-top: 1rem;">-->
-			<!--          occupied with ID {{ occupied.id }} {{ occupied.type }}-->
-			<!--        </div>-->
-			<!--      </template>-->
+			<!--			      {{ date.date.getDate() }}-->
+			<!--			      <div>{{ getDayName(date.date.getDay()) }}</div>-->
+			<!--			      <div>{{ getMonthName(date.date.getMonth()) }}</div>-->
+			<div v-if="date.marking">
+				{{ date.marking.name }}
+			</div>
 		</div>
 		<occupation
 			v-for="occupation in occupations"
