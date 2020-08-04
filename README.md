@@ -1,4 +1,4 @@
-# vue-horizontal-calendar 
+# vue-horizontal-calendar
 [![Build Status](https://travis-ci.org/AndreKelling/vue-horizontal-calendar.svg?branch=master)](https://travis-ci.org/AndreKelling/vue-horizontal-calendar)
 [![Coverage Status](https://coveralls.io/repos/github/AndreKelling/vue-horizontal-calendar/badge.svg?branch=master)](https://coveralls.io/github/AndreKelling/vue-horizontal-calendar?branch=master)
 
