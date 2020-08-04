@@ -6,7 +6,7 @@
       @input="selectedDate = $event.target.valueAsDate"
     />
     <div class="wrapper">
-      <div class="label" v-if="tableData.length > 0">Items</div>
+      <div class="label" v-if="calendarData.length > 0">Items</div>
       <head-cell
         v-for="date in dates"
         :class="{ today: equalsSelectedDate(date) }"
@@ -18,7 +18,7 @@
       />
     </div>
     <row
-      v-for="element in tableData"
+      v-for="element in calendarData"
       v-bind:key="element.id"
       :title="element.name"
       :dates="datesWithOccupations(dates, element.occupations)"
@@ -47,7 +47,7 @@ export default {
       type: Date,
       default: () => new Date()
     },
-    tableData: {
+    calendarData: {
       type: Array,
       default: () => []
     }

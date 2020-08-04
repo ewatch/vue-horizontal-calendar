@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <calendar :render-days="26" :table-data="tableData" />
+    <calendar :render-days="26" :calendar-data="data" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ export default {
   },
   data: function() {
     return {
-      tableData: [
+      data: [
         {
           id: 1,
           name: "Something Beautiful",
@@ -53,6 +53,19 @@ export default {
               name: "Work",
               startDate: todayDate + days(1),
               endDate: todayDate + days(3)
+            }
+          ]
+        },
+        {
+          id: 3,
+          name: "Super long",
+          occupations: [
+            {
+              id: 1,
+              name: "Super Long Booking",
+              startDate: todayDate - days(33),
+              endDate: todayDate + days(33),
+              background: "lightsalmon"
             }
           ]
         }
