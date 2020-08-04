@@ -17,7 +17,6 @@
       <!--        </div>-->
       <!--      </template>-->
     </div>
-    <!--    {{ log(occupations) }}-->
     <template v-for="occupied in occupations">
       <div
         :class="[
@@ -113,9 +112,6 @@ export default {
   methods: {
     getDayName: dateHelper.getDayName,
     getMonthName: dateHelper.getMonthName,
-    log: v => {
-      console.log(v);
-    },
     daysInDateRange: (firstDate, secondDate) => {
       // full days including the day itself
       const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
