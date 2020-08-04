@@ -44,7 +44,7 @@ export default {
             {
               id: 1,
               name: "Lunchparty",
-              startDate: todayDate - days(4),
+              startDate: todayDate - days(8),
               endDate: todayDate,
               background: "orange"
             },

@@ -185,5 +185,19 @@ $cellWidth: 50px;
   opacity: 0.6;
   background-color: cornflowerblue;
   border-radius: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &--startoff {
+    padding-left: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &--endoff {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 </style>
