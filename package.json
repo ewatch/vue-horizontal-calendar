@@ -1,6 +1,6 @@
 {
   "name": "vue-horizontal-calendar",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "engines": {
     "node": ">=12"
@@ -13,7 +13,6 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -26,10 +25,10 @@
     "@vue/test-utils": "1.0.3",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.1.0",
+    "babel-jest": "^26.2.2",
     "chromedriver": "^84.0.1",
     "coveralls": "^3.1.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.6.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
