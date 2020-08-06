@@ -1,19 +1,12 @@
 <template>
 	<div class="wrapper">
 		<div class="label">{{ title }}</div>
-		<div
-			class="cell"
+		<cell
 			v-for="date in dates"
 			:key="date.date.getTime()"
-			:class="cssClass"
-		>
-			<!--			      {{ date.date.getDate() }}-->
-			<!--			      <div>{{ getDayName(date.date.getDay()) }}</div>-->
-			<!--			      <div>{{ getMonthName(date.date.getMonth()) }}</div>-->
-			<div v-if="date.marking">
-				{{ date.marking.name }}
-			</div>
-		</div>
+			:date="date.date"
+			:mark="date.marking"
+		/>
 		<occupation
 			v-for="occupation in occupations"
 			:name="occupation.name"
@@ -31,10 +24,12 @@
 
 <script>
 import * as dateHelper from "../helper/date";
+import Cell from "./Cell";
 import Occupation from "./Occupation";
 
 export default {
 	components: {
+		Cell,
 		Occupation
 	},
 	props: {
@@ -60,9 +55,6 @@ export default {
 		}
 	},
 	computed: {
-		cssClass: () => {
-			return "classi";
-		},
 		scheduleStartDate() {
 			return this.dates[0].date;
 		},

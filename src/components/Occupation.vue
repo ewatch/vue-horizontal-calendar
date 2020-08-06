@@ -89,9 +89,6 @@ export default {
 	computed: {
 		valid: function() {
 			return this.startDate && this.endDate;
-		},
-		cssClass: () => {
-			return "classi";
 		}
 	},
 	methods: {

@@ -211,6 +211,10 @@ export default {
 			cursor: grabbing;
 		}
 	}
+
+	&--selected {
+		background-color: lightgreen;
+	}
 }
 
 .occupation {
