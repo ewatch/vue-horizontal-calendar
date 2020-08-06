@@ -70,7 +70,8 @@ describe("Row.vue", () => {
 				]
 			});
 
-			expect(wrapper.findAll("div.cell").length).toEqual(5);
+			// console.log(wrapper.html())
+			expect(wrapper.findAll("cell-stub").length).toEqual(5);
 		});
 	});
 });

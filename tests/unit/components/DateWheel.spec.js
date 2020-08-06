@@ -1,9 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
 import DateWheel from "@/components/DateWheel.vue";
 
+const selectedDate = new Date();
 const componentFactory = propsData => {
 	return shallowMount(DateWheel, {
 		propsData: {
+			selectedDate,
 			...propsData
 		}
 	});
