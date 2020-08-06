@@ -1,27 +1,33 @@
 <template>
 	<div class="cell cell--header">
 		<div class="day-of-month">{{ dayOfMonth }}</div>
-		<div class="day-name">{{ dayName }}</div>
-		<div v-if="dayOfMonth === 1" class="month-name">{{ monthName }}</div>
+		<div class="day-name">{{ getDayName(date.getDay()) }}</div>
+		<div v-if="dayOfMonth === 1 || index === 0" class="month-name">{{ getMonthName(date.getMonth()) }}</div>
 	</div>
 </template>
 
 <script>
+import * as dateHelper from "../helper/date";
+
 export default {
 	props: {
-		dayOfMonth: {
+		date: {
+			type: Date,
+			required: true,
+		},
+		index: {
 			type: Number,
 			required: true,
-			default: 0
 		},
-		dayName: {
-			type: String,
-			required: false
-		},
-		monthName: {
-			type: String,
-			required: false
+	},
+	computed: {
+		dayOfMonth() {
+			return this.date.getDate()
 		}
+	},
+	methods: {
+		getDayName: dateHelper.getDayName,
+		getMonthName: dateHelper.getMonthName,
 	}
 };
 </script>

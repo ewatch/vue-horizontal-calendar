@@ -33,10 +33,9 @@
 			<div class="label" v-if="calendarData.length > 0">Items</div>
 			<div class="cells">
 				<head-cell
-					v-for="date in dates"
-					:day-of-month="date.getDate()"
-					:day-name="getDayName(date.getDay())"
-					:month-name="getMonthName(date.getMonth())"
+					v-for="(date, index) in dates"
+					:date="date"
+					:index="index"
 					:key="date.getTime()"
 				/>
 				<date-wheel
@@ -116,8 +115,6 @@ export default {
 		}
 	},
 	methods: {
-		getDayName: dateHelper.getDayName,
-		getMonthName: dateHelper.getMonthName,
 		setSelectedDate: function(date) {
 			this.selectedDate = date;
 		},
