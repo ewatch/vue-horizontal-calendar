@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import DateWheel from "@/components/DateWheel.vue";
+import Filters from "@/components/Filters.vue";
 
 const selectedDate = new Date();
 const componentFactory = propsData => {
-	return shallowMount(DateWheel, {
+	return shallowMount(Filters, {
 		propsData: {
 			selectedDate,
 			...propsData
@@ -11,7 +11,7 @@ const componentFactory = propsData => {
 	});
 };
 
-describe("DateWheel.vue", () => {
+describe("Filters.vue", () => {
 	it("exists", () => {
 		const wrapper = componentFactory();
 
@@ -50,11 +50,30 @@ describe("DateWheel.vue", () => {
 		});
 	});
 
-	describe("test maximal rendering of the component", () => {
-		const wrapper = componentFactory();
+	describe("the datepicker that is part of the component", () => {
+		const wrapper = componentFactory({ selectedDate: new Date() });
+		const input = wrapper.find('input[type="date"]');
 
-		it("should render a div.date-wheel containing nothing", () => {
-			expect(wrapper.find("div.date-wheel").text()).toContain("");
+		it("should have input component with the type date", () => {
+			expect(input.exists()).toBeTruthy();
+		});
+
+		it("should emit date change", () => {
+			input.element.value = "2017-1-1";
+			input.trigger("input");
+
+			expect(wrapper.emitted().changeDate[0]).toBeTruthy();
+			// expect(wrapper.emitted().changeDate[0]).toBe([new Date(2017,1,1)])
+		});
+
+		it("should emit cell changee", () => {
+			const input = wrapper.find('input[type="number"]');
+
+			input.element.value = 22;
+			input.trigger("change");
+
+			expect(wrapper.emitted().changeCell[0]).toBeTruthy();
+			expect(wrapper.emitted().changeCell[0]).toStrictEqual([22]);
 		});
 	});
 });

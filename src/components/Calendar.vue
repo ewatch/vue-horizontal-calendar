@@ -1,33 +1,10 @@
 <template>
 	<div class="outer" :style="cssVars">
-		<input
-			type="date"
-			:value="selectedDate && selectedDate.toISOString().split('T')[0]"
-			@input="selectedDate = $event.target.valueAsDate"
-		/>
-		<select
-			@change="
-				setSelectedDate(
-					new Date(new Date().getFullYear(), monthIndex, 1)
-				)
-			"
-			v-model="monthIndex"
-		>
-			<option
-				v-for="(monthName, index) in monthNames"
-				:key="monthName"
-				:value="index"
-			>
-				{{ monthName }}
-			</option>
-		</select>
-		Density:
-		<input
-			type="number"
-			min="10"
-			max="100"
-			:value="cellWidth"
-			@change="cellWidth = $event.target.value"
+		<filters
+			:selectedDate="selectedDate"
+			:cellWidth="cellWidth"
+			@changeDate="setSelectedDate"
+			@changeCell="setCellWidth"
 		/>
 		<div class="wrapper">
 			<div class="label" v-if="calendarData.length > 0">Items</div>
@@ -41,7 +18,7 @@
 				<date-wheel
 					:selectedDate="selectedDate"
 					:cellWidth="cellWidth"
-					@change:day="setSelectedDate"
+					@changeDay="setSelectedDate"
 				/>
 			</div>
 		</div>
@@ -59,13 +36,14 @@
 
 <script>
 import DateWheel from "./DateWheel";
+import Filters from "./Filters";
 import HeadCell from "./HeadCell";
 import Row from "./Row";
-import * as dateHelper from "../helper/date.js";
 
 export default {
 	components: {
 		DateWheel,
+		Filters,
 		HeadCell,
 		Row
 	},
@@ -87,9 +65,7 @@ export default {
 		return {
 			selectedDate: new Date(),
 			labelWidth: 200,
-			cellWidth: 50,
-			monthNames: dateHelper.monthNames,
-			monthIndex: this.date.getMonth()
+			cellWidth: 50
 		};
 	},
 	computed: {
@@ -117,6 +93,9 @@ export default {
 	methods: {
 		setSelectedDate: function(date) {
 			this.selectedDate = date;
+		},
+		setCellWidth: function(cell) {
+			this.cellWidth = cell;
 		},
 		datesWithMarks: (dates, marks) => {
 			let dateArray = [];

@@ -59,7 +59,7 @@ export default {
 			const newDate =
 				this.selectedDate.getTime() + dateHelper.days(daysToJump);
 
-			this.$emit("change:day", new Date(newDate));
+			this.$emit("changeDay", new Date(newDate));
 		}
 	},
 	mounted() {
